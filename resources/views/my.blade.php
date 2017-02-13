@@ -10,7 +10,7 @@
                 <p>{{ Carbon\Carbon::parse($item->time)->format('d-m-Y i') }}</p>
                 <p>{{ date('F d, Y', strtotime($item->time)) }}</p>
                 <p>{{ date_format(date_create($item->time), 'Y-m-d H:i:s') }}</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                <p><a class="btn btn-secondary" href="{{route('myShow', ['id' => $item->id])}}" role="button">View details &raquo;</a></p>
             </div>
         @endforeach
     </div>

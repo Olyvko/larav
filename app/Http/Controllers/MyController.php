@@ -16,4 +16,12 @@ class MyController extends Controller
 
         return view('my')->with($data);
     }
+
+    public function show($id)
+    {
+        $article = Article::select(['id', 'name'])->where('id', $id)->first();
+        $data = ['m1' => 'Hy', 'm2' => ' Rom', 'article' => $article];
+
+        return view('my-content')->with($data);
+    }
 }

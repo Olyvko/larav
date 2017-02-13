@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/my','MyController@index');
+
+Route::get('/my/{id}','MyController@show')->name('myShow');
