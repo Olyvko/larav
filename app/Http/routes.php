@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/my','MyController@index');
 
 Route::get('/my/{id}','MyController@show')->name('myShow');
+
+Route::get('/add','MyController@add')->name('myAdd');
+
+Route::post('/add','MyController@insert')->name('myInsert');

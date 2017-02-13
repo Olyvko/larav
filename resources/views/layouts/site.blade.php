@@ -58,6 +58,14 @@
     </div>
 </div>
 
+@if(count($errors) > 0)
+<div class="alert alert-danger"></div>
+<ul>
+    @foreach($errors->all() as $error)
+        <li>{{$error}}</li>
+        @endforeach
+</ul>
+        @endif
 @yield('content')
 
 <!-- Bootstrap core JavaScript

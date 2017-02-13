@@ -24,4 +24,26 @@ class MyController extends Controller
 
         return view('my-content')->with($data);
     }
+
+    public function add()
+    {
+        $data = ['m1' => 'Hy', 'm2' => ' Rom'];
+        return view('add-content')->with($data);
+    }
+
+    public function insert(Request $request)
+    {
+        $this->validate($request, [
+            'email' =>'required|max:10',
+            'pwd' =>'required'
+
+        ]);
+        $data = $request->all();
+        $articles = new Article();
+        $articles->fill(array('descr' => $data['pwd'], 'name' => $data['email']));
+        $articles->save();
+
+
+        return redirect('/');
+    }
 }
