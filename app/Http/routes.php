@@ -15,10 +15,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/my','MyController@index');
+//Route::get('/my','MyController@index');
+Route::get('/my', [
+    'middleware' => 'auth',
+    'uses' => 'MyController@index'
+])->name('my');
 
-Route::get('/my/{id}','MyController@show')->name('myShow');
+Route::get('/my/{id}',[
+    'uses' => 'MyController@show',
+    'middleware' => 'mymiddle'
+])->name('myShow');
 
 Route::get('/add','MyController@add')->name('myAdd');
 
 Route::post('/add','MyController@insert')->name('myInsert');
+
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin')->name('userLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister')->name('authRegister');
