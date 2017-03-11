@@ -110,6 +110,7 @@ class MyController extends Controller
         ]);
 
         //OR
+        /*
         // can add new Request
         $messages = [];
         $val = Validator::make($request->all(), [
@@ -120,6 +121,7 @@ class MyController extends Controller
             //!!add session start
             redirect()->route('myAdd')->withErrors($val)->withInput();
         }
+        */
 
         $data = $request->all();
         $articles = new Article();
