@@ -39,6 +39,11 @@ Route::post('auth/register', 'Auth\AuthController@postRegister')->name('authRegi
 
 Route::auth();
 
+//Route::get('/login',['uses' => 'Auth\MyAuthController@showLogin']);
+//Route::post('/login',['uses' => 'Auth\MyAuthController@authenticate']);
+
+
+
 Route::get('/home', 'HomeController@index');
 
 Route::group([
