@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\Article;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class MyController extends Controller
 {
@@ -107,6 +108,19 @@ class MyController extends Controller
             'pwd' =>'required'
 
         ]);
+
+        //OR
+        // can add new Request
+        $messages = [];
+        $val = Validator::make($request->all(), [
+                'email' =>'required|max:10',
+                'pwd' =>'required'
+            ], $messages);
+        if($val->fails()) {
+            //!!add session start
+            redirect()->route('myAdd')->withErrors($val)->withInput();
+        }
+
         $data = $request->all();
         $articles = new Article();
         $articles->fill(array('descr' => $data['pwd'], 'name' => $data['email']));
