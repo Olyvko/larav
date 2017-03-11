@@ -12,6 +12,8 @@ use App\Article;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Event;
+use App\Events\onAddArticleEvent;
 
 class MyController extends Controller
 {
@@ -128,6 +130,7 @@ class MyController extends Controller
         $articles->fill(array('descr' => $data['pwd'], 'name' => $data['email']));
         $articles->save();
 
+        Event::fire(new onAddArticleEvent($articles));
 
         return redirect('/');
     }
