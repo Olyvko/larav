@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Event;
 use App\Events\onAddArticleEvent;
 
+use App\Helpers\Contracts\SaveStr;
+
 class MyController extends Controller
 {
     public function index()
@@ -44,6 +46,7 @@ class MyController extends Controller
 
     public function show($id)
     {
+
         $article = Article::select(['id', 'name'])->where('id', $id)->first();
         $data = ['m1' => 'Hy', 'm2' => ' Rom', 'article' => $article];
 
@@ -103,8 +106,10 @@ class MyController extends Controller
         return view('add-content')->with($data);
     }
 
-    public function insert(Request $request)
+    public function insert(Request $request, SaveStr $saveStr)
     {
+        $saveStr->save($request);
+
         $this->validate($request, [
             'email' =>'required|max:10',
             'pwd' =>'required'
